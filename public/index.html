@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description"
+          content="Web site created using create-react-app" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Gulf to Ocean Beach Information</title>
+    <meta name="author" content="gulftoocean.com" />
+
+
+    <link href="https://gulftoocean.com/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="https://gulftoocean.com/Content/Beaches.css" rel="stylesheet" type="text/css" />
+    <script src="https://gulftoocean.com/Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="https://gulftoocean.com/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="https://gulftoocean.com/Scripts/modernizr-2.5.3.js" type="text/javascript"></script>
+    <script src="https://gulftoocean.com/Scripts/cookies.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function closePrivacyWarning() {
+            document.getElementById("cookie_directive_container").style.display = "none";
+        }
+
+        function saveForm() {
+
+            var Subject = document.getElementById('Subject').value;
+            var Message = document.getElementById('Message').value;
+            var FromEmailAddress = document.getElementById('FromEmailAddress').value;
+            var FromName = document.getElementById('FromName').value;
+            var captcha = document.getElementById('captcha').value;
+
+
+
+            $.ajax(
+
+                {
+
+                    type: "POST",
+
+                    url: '/ContactUs',
+
+                    data: "ajax=true"
+                        + "&Subject=" + Subject
+                        + "&Message=" + Message
+                        + "&FromEmailAddress=" + FromEmailAddress
+                        + "&FromName=" + FromName
+                        + "&captcha=" + captcha
+                    ,
+
+                    success: function (result) {
+                        document.getElementsByTagName('form')[0].innerHTML = result;
+
+                    },
+
+                    error: function (req, status, error) {
+
+                        alert("Sorry! We could not send your email.");
+
+                    }
+
+                });
+
+            return false;
+
+        }
+    </script>
+
+    <style type="text/css">
+        div.leftPanel {
+            width: 15%;
+            padding: 20px;
+        }
+
+        div.centerPanel {
+            width: 60%;
+            padding: 20px;
+            clear: none;
+        }
+
+        div.rightPanel {
+            width: 15%;
+            padding: 20px;
+            margin: 5px;
+            background-color: white;
+            clear: none;
+            min-width: 200px;
+        }
+
+            div.rightPanel div {
+                border: solid 1px navy;
+                padding: 20px;
+                margin: 5px;
+                background-color: white;
+                float: left;
+                clear: both;
+                min-width: 150px;
+            }
+
+        div.divNav {
+            float: left;
+            background-color: #003851;
+            border: 1px solid #1d130b;
+            border-radius: 2px;
+            padding: 5px;
+            margin-right: 10px;
+            min-height: 300px;
+            min-width: 200px;
+        }
+
+            div.divNav a {
+                text-align: center;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                text-decoration: none;
+                font-size: larger;
+                color: #003851;
+                display: block;
+                border: 1px solid #1d130b;
+                background-color: #00A2E8;
+                background: linear-gradient(#00A2E8, #00FFAC);
+            }
+
+                div.divNav a:hover {
+                    color: white;
+                    background-color: #003851;
+                    background: linear-gradient(#00FFAC,#003851);
+                    cursor: pointer;
+                }
+
+                div.divNav a:active {
+                    color: white;
+                    background-color: red;
+                    cursor: pointer;
+                }
+
+        .logo {
+            color: #00ffac;
+            text-align: center;
+            text-shadow: navy 1px 2px 0;
+            font-size: 25px;
+            font-style: oblique;
+            font-family: Lucida Console, Lucida Sans Typewriter, monaco, Bitstream Vera Sans Mono, monospace;
+
+                }
+
+        .clockBanner {
+            float: right;
+            margin-left: auto;
+            margin-right: 21%;
+            margin-bottom: 20px;
+            width: 60%;
+            padding: 5px;
+            background-color: #eae5ec;
+            border-radius: 5px;
+            box-shadow: 0px 0px 25px #ccc6cd;
+        }
+
+        div#cookie_directive_container {
+            text-align: left;
+            padding: 5px;
+            box-shadow: rgba(136, 165, 191, 0.98) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+        }
+    </style>
+</head>
+  <body>
+    <noscript><div class="logo"><h5>Gulf to Ocean<br>Beach Information</h5></div>This site is best viewed with JavaScript Enabled.<br /> <a href="https://gulftoocean.com/Beach">Click here</a> to view the older version of this site.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
